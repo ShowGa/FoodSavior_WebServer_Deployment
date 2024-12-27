@@ -16,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class FirebaseHelper {
     public FirebaseUserInfo verifyToken(String idToken) {
         try {
+            System.out.println("firebase Token from client : " + idToken);
 
             FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
 
@@ -25,6 +26,7 @@ public class FirebaseHelper {
                     decodedToken.getName()
             );
         } catch (Exception e) {
+            System.out.println(e);
             throw new TokenValidationException("Invalid or expired Firebase token", e);
         }
 
