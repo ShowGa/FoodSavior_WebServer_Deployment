@@ -6,6 +6,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.security.Key;
 import java.util.Date;
@@ -14,10 +15,15 @@ public class JwtUtil {
 
     // set into the safe place
     // need 32 characters
-    private static final String SECRET_KEY = Dotenv.load().get("SECRET_KEY_JWT");
+    private static String secretKey;
+
+    @Value("${SECRET_KEY}")
+    public void setSecretKey(String secretKey) {
+        JwtUtil.secretKey = secretKey;
+    }
 
     private static Key getSigningKey() {
-        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+        return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
     // expiration => days
