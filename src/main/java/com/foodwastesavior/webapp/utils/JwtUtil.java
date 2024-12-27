@@ -17,7 +17,7 @@ public class JwtUtil {
     // need 32 characters
     private static String secretKey;
 
-    @Value("${SECRET_KEY}")
+    @Value("${SECRET_KEY_JWT}")
     public void setSecretKey(String secretKey) {
         JwtUtil.secretKey = secretKey;
     }
